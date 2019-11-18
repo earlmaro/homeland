@@ -1,0 +1,227 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\post;
+use App\User;
+
+class PostController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $users= User::all();
+        $posts = post::where('validation',2)->get();
+        return view('posts.index', compact('posts','users'));
+
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('posts.create');
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+
+       $this->validate($request, [
+           'proptype'=> 'required',
+           'housetype'=>'nullable',
+           'moderator'=>'nullable',
+        //    'star'=>'nullable',
+           'bvn'=>'nullable',
+           'review'=>'nullable',
+           'phone'=>'required|min:11',
+           'landmark'=>'required',
+           'post-worth'=> 'required',
+           'vacancy'=> 'required',
+           'propdesc'=> 'required',
+           'address'=> 'required',
+           'grade'=> 'nullable',
+           'validation'=>'required',
+           'filename' => 'required',
+           'filename.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+       ]);
+
+
+
+
+
+       if($request->hasfile('filename'))
+       {
+
+          foreach($request->file('filename') as $image)
+          {
+              $name=$image->getClientOriginalName();
+              $image->move(public_path().'/images/', $name);
+              $dat[] = $name;
+          }
+       }
+
+    //    $post= new post();
+       $formatted= json_encode($dat);
+
+
+       Post::create([
+
+    'proptype' => $request['proptype'],
+    'housetype' => $request->has('housetype') ? $request->input('housetype') : NULL,
+    'landmark' => $request['landmark'],
+    'moderator' => $request->has('moderator') ? $request->input('moderator') : NULL,
+    // 'star' => $request->has('star') ? $request->input('star') : NULL,
+    // 'bvn' => '',
+    'bvn' => $request->has('bvn') ? $request->input('bvn') : NULL,
+    'phone' => $request['phone'],
+    // 'review' => '',
+    'review' => $request->has('review') ? $request->input('review') : NULL,
+    'worth' => $request['post-worth'],
+    'vacancy' => $request['vacancy'],
+    'propdesc' => $request['propdesc'],
+    'address' => $request['address'],
+    'grade' => $request->has('grade') ? $request->input('grade') : NULL,
+    'validation' => $request['validation'],
+    'user_id' => auth()->id(),
+    'filename' => $formatted
+
+
+    ]);
+    //    $post->save();
+       return redirect('/post/create')->with('success', 'Post created');
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($post)
+    {
+        $post = Post::find($post);
+        return view('posts.show', compact('post'));
+
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Post $id)
+    {
+        $post = post::find($id);
+        return view('posts.edit');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request,  $id)
+    {
+        $this->validate($request, [
+            'proptype'=> 'required',
+            'housetype'=>'nullable',
+            'moderator'=>'nullable',
+         //    'star'=>'nullable',
+            'bvn'=>'nullable',
+            'review'=>'nullable',
+            'phone'=>'required|min:11',
+            'landmark'=>'required',
+            'worth'=> 'required',
+            'vacancy'=> 'required',
+            'propdesc'=> 'required',
+            'address'=> 'required',
+            'grade'=> 'nullable',
+            'validation'=>'required',
+            'filename' => 'required',
+            'filename.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+        ]);
+
+
+       if($request->hasfile('filename'))
+       {
+
+          foreach($request->file('filename') as $image)
+          {
+              $name=$image->getClientOriginalName();
+              $image->move(public_path().'/images/', $name);
+              $dat[] = $name;
+          }
+       }
+
+    //    $post= new post();
+       $formatted= json_encode($dat);
+
+
+
+        $post = post::find($id);
+        $post->proptype = $request->proptype;
+        $post->housetype = $request->housetype;
+        $post->moderator = $request->moderator;
+        $post->bvn =$request->bvn;
+        $post->review = $request->review;
+        $post->phone = $request->phone;
+        $post->landmark = $request->landmark;
+        $post->worth = $request->worth;
+        $post->vacancy = $request->vacancy;
+        $post->propdesc = $request->propdesc;
+        $post->address = $request->address;
+        $post->grade = $request->grade;
+        $post->validation = $request->validation;
+        $post->filename = $request->formatted;
+
+        $post->save();
+
+        return redirect('post/'.$post->id);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}
