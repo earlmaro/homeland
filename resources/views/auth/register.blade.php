@@ -12,6 +12,22 @@
                         @csrf
 
                         <div class="form-group row">
+                                <label for="usercat" class="col-md-4 col-form-label text-md-right">{{ __('Title') }}</label>
+
+                                <div class="col-md-6">
+                                                <select name="usercat" class="form-control " >
+                                                        <option value=""  selected >Select title</option>
+                                                    <option value="Landord">Landord</option>
+                                                    <option value="Developer">Developer</option>
+                                                    <option value="Tenant">Tenant</option>
+
+                                                </select>
+                                            </div>
+
+
+                            </div>
+
+                        <div class="form-group row">
                             <label for="firstname" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
 
                             <div class="col-md-6">
@@ -73,13 +89,7 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="usercat" class="col-md-4 col-form-label text-md-right">{{ __('Title') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="usercat" type="text" class="form-control" name="usercat" required autocomplete="on">
-                            </div>
-                        </div>
                         {{-- <div class="form-group row">
                                 <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Profile Picture') }}</label>
 

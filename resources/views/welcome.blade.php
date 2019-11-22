@@ -75,7 +75,7 @@ h1{
     <div class="container-fluid slider p-5">
 
         <div class="first pb-5" >
-            <h1 >welcome to  <span style="color: #5a01fe"> HomeLand </span><span class="typed-words"></span></h1> <br>
+            <h1 >welcome to  <span style="color: orange"> HomeLand </span><span class="typed-words"></span></h1> <br>
         </div>
 
     </div>
@@ -198,7 +198,7 @@ h1{
 <script src="{{ asset('/js/typed.js') }}" defer></script>
         <script>
             var typed = new Typed('.typed-words', {
-            strings: [" where you dont just get your dream home you get it at AFFORDABLE prices at the convinence of your HOME, OFFICE or anywhere you please... :)"],
+            strings: [" where you dont just get your dream property you get it at AFFORDABLE prices and at the convinence of your HOME, OFFICE or anywhere you please... :)"],
             typeSpeed: 50,
             backSpeed: 100,
             backDelay: 15000,

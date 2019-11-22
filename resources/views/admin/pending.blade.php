@@ -165,6 +165,8 @@ Public pending
                                                       <p>Moderator: {{$unApprovedPost->moderator}}</p>
                                                       {{-- <p>star: {{$approvedPost->user->star}}</p> --}}
                                                       <p>vacancy: {{$unApprovedPost->vacancy}}</p>
+                                                      <p >describtion: {{$unApprovedPost->propdesc}}</p>
+
                                                       <p>contact: {{$unApprovedPost->phone}}</p>
                                                       {{-- <p>Email: {{$approvedPost->user->email}}</p> --}}
                                              <p class="card-text">price range: {{$unApprovedPost->worth}}</p>
@@ -185,10 +187,10 @@ Public pending
 
             <div class="col-md-2 col-sm-12 col-lg-2 container py-3">
                 <ul>
-                    <li ><b><a href='/admin/supervise'>view all supervised posts</a></b></li>
-                    <li><b><a href='/admin/pending'>view all pending posts</a></b></li>
-                    <li><b><a href='/admin/mypending'>view all of your pending posts</a></b></li>
-
+                        {{-- <li><b><a href='/admin/pending'>view all pending posts</a></b></li> --}}
+                        <li><b><a href='/admin/mypending'>view all your pending posts</a></b></li>
+                        <li  class="py-3"><b><a href='/admin/approved'>view all Approved posts</a></b></li>
+                         <li><b><a href='/admin/concluded'>view all concluded posts</a></b></li>
 
 
                 </ul>

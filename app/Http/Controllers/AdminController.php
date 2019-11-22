@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Post;
+// use app\controllers\image as image;
 
 class AdminController extends Controller
 {
@@ -16,30 +17,33 @@ class AdminController extends Controller
     public function index()
     {
         $users= User::all();
-        $approvedPosts = post::where('validation',2)->get();
+        $approvedPosts = post::where('validation',2)->latest()->get();
         $posts= Post::all();
         // $post = $posts[0];
-        foreach($posts as $post)
-         $images = json_decode($post->filename, true);
+        // foreach($posts as $post)
+        //  $images = json_decode($post->filename, true);
          if(request()->has('proptype')){
-            $approvedPosts= post::where('proptype', request('proptype'))->get();
+            $approvedPosts= post::where('proptype', request('proptype'))->latest()->get();
         }elseif
         (request()->has('housetype')){
-            $approvedPosts= post::where('housetype',request('housetype'))->get();
+            $approvedPosts= post::where('housetype',request('housetype'))->latest()->get();
         }elseif
         (request()->has('landmark')){
-            $approvedPosts= post::where('landmark',request('landmark'))->get();
+            $approvedPosts= post::where('landmark',request('landmark'))->latest()->get();
         }elseif
         (request()->has('worth')){
-            $approvedPosts= post::where('worth',request('worth'))->get();
+            $approvedPosts= post::where('worth',request('worth'))->latest()->get();
         }elseif
         (request()->has('vacancy')){
-            $approvedPosts= post::where('vacancy',request('vacancy'))->get();
+            $approvedPosts= post::where('vacancy',request('vacancy'))->latest()->get();
         }else{
-         $approvedPosts = post::where('validation',2)->get();
+         $approvedPosts = post::where('validation',2)->latest()->get();
 
         }
+        $post = $posts[0];
+        foreach($posts as $post)
 
+        $images = json_decode($post->filename, true);
 
         return view('admin.index', compact('approvedPosts','users','images'));
 
@@ -55,10 +59,25 @@ class AdminController extends Controller
         //
     }
 
+    public function concludedPosts()
+    {
+        $concludedPosts = Post::where([
+            ['validation',3],['moderator', auth()->user()->id]])->latest()->get();
+
+        $users = User::all();
+        $posts= Post::all();
+        // $post = $posts[0];
+        foreach($posts as $post)
+        $images = json_decode($post->filename, true);
+        return view('admin.conclude', compact('concludedPosts', 'users','images'));
+    }
+
+
+
 
     public function pendingposts()
     {
-        $unApprovedPosts = POST::where('validation',1)->get();
+        $unApprovedPosts = POST::where('validation',1)->latest()->get();
         $users = User::all();
         $posts= Post::all();
         // $post = $posts[0];
@@ -69,13 +88,34 @@ class AdminController extends Controller
 
 
 
+
+
+    public function approvedPosts()
+    {
+        $approvedPosts = Post::where([
+            ['validation',2],['moderator', auth()->user()->id]])->latest()->get();
+
+        $users = User::all();
+        $posts= Post::all();
+        // $post = $posts[0];
+        foreach($posts as $post)
+        $images = json_decode($post->filename, true);
+        return view('admin.approved', compact('approvedPosts', 'users','images'));
+    }
+
+
+
+
+
+
+
     public function supervisedpost()
     {
         $posts= Post::all();
         // $post = $posts[0];
         foreach($posts as $post)
         $images = json_decode($post->filename, true);
-        $supervised = Post::where('moderator', auth()->user()->id)->get();
+        $supervised = Post::where('moderator', auth()->user()->id)->latest()->get();
 
         return view('admin/supervise', compact('supervised','images'));
     }
@@ -102,8 +142,8 @@ class AdminController extends Controller
      */
     public function show(Post $post)
     {
-        $users = User::where('is_admin', 1)->get();
-        $unApprovedPosts = post::where('validation',1)->get();
+        $users = User::where('is_admin', 1)->latest()->get();
+        $unApprovedPosts = post::where('validation',1)->latest()->get();
         // dd($approvedPosts);
         $posts = Post::find($post);
         //  $post = $post[0];
@@ -123,25 +163,28 @@ class AdminController extends Controller
         //
     }
 
-    public function concluded()
-    {
-        $concluded = Post::where('review', 1);
-        $posts= Post::all();
-        // $post = $posts[0];
-        foreach($posts as $post)
-        $images = json_decode($post->filename, true);
+    // public function concluded()
+    // {
+    //     $concluded = Post::where('review', 1);
+    //     $posts= Post::all();
+    //     // $post = $posts[0];
+    //     foreach($posts as $post)
+    //     $images = json_decode($post->filename, true);
 
-        return view('admin.concluded', compact('concluded', 'images'));
-    }
+    //     return view('admin.concluded', compact('concluded', 'images'));
+    // }
 
 
 
     public function myadminpending()
     {
         $adminpending = Post::where([
-            ['validation',1],['user_id', auth()->user()->id]]);
+            ['validation',1],['moderator',auth()->user()->id]])->get();
+            $posts = Post::all();
+            foreach($posts as $post)
+            $images = json_decode($post->filename, true);
 
-            return view('admin.myadminpending',compact('adminpending'));
+            return view('admin.myadminpending',compact('adminpending','images'));
     }
 
 

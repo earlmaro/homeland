@@ -67,7 +67,7 @@
 }
 .table{
             border-style: dotted;
-            border-color:#3490dc;
+            border-color:#808080;
             border-radius: 5px;
             margin-right:10px;
             margin-left:0px;

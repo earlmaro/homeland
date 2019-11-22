@@ -33,6 +33,7 @@ class PostController extends Controller
 
         $users= User::all();
         $posts= Post::all();
+        $approvedPosts = post::where('validation',2)->get();
         if(request()->has('proptype')){
             $approvedPosts= post::where('proptype', request('proptype'))->latest()->get();
         }elseif
@@ -51,13 +52,28 @@ class PostController extends Controller
          $approvedPosts = post::where('validation',2)->latest()->get();
 
         }
-        // $post = $posts[0];
+        $post = $posts[0];
         foreach($posts as $post)
 
         $images = json_decode($post->filename, true);
         return view('posts.index', compact('approvedPosts','users', 'images','post'));
 
     }
+
+
+    public function concludedPosts()
+    {
+        $concludedPosts = Post::where([
+            ['validation',3],['user_id', auth()->user()->id]])->latest()->get();
+
+        $users = User::all();
+        $posts= Post::all();
+        // $post = $posts[0];
+        foreach($posts as $post)
+        $images = json_decode($post->filename, true);
+        return view('posts.conclude', compact('concludedPosts', 'users','images'));
+    }
+
 
 
     /**
@@ -73,7 +89,9 @@ class PostController extends Controller
 
     public function allposts()
     {
-        $userPosts = Post::where('user_id', auth()->user()->id)->get();
+        $userPosts = Post::where('user_id', auth()->user()->id)->latest()->get();
+        $userPosts =  POST::where([
+            ['validation',2],['user_id', auth()->user()->id]])->latest()->get();
         $posts= Post::all();
         // $post = $posts[0];
         foreach($posts as $post)
@@ -82,11 +100,25 @@ class PostController extends Controller
     }
 
 
+    public function approvedPosts()
+    {
+        $approvedPosts = Post::where([
+            ['validation',2],['moderator', auth()->user()->id]])->latest()->get();
+
+        $users = User::all();
+        $posts= Post::all();
+        // $post = $posts[0];
+        foreach($posts as $post)
+        $images = json_decode($post->filename, true);
+        return view('admin.approved', compact('approvedPosts', 'users','images'));
+    }
+
+
     public function pendingposts()
     {
         $posts= Post::all();
         $unApprovedPosts = POST::where([
-            ['validation',1],['user_id', auth()->user()->id]])->get();
+            ['validation',1],['user_id', auth()->user()->id]])->latest()->get();
 
             // $post = $posts[0];
             foreach($posts as $post)
@@ -145,7 +177,7 @@ class PostController extends Controller
     //    $post= new post();
        $formatted= json_encode($dat);
 
-    //    $image = image::make(public_path('images'. $formatted))->fit(300,300);
+
 
 
 
@@ -218,7 +250,7 @@ class PostController extends Controller
         request()->validate([
             'proptype'=> 'required',
             'housetype'=>'nullable',
-            'moderator'=>'nullable',
+            // 'moderator'=>'',
          //    'star'=>'nullable',
             'bvn'=>'nullable',
             'review'=>'nullable',
@@ -248,12 +280,12 @@ class PostController extends Controller
 
     //    $post= new post();
        $formatted= json_encode($dat);
-       $image = image::make(public_path('images'. $formatted))->fit(300,300);
+    //    $image = image::make(public_path('images'. $formatted))->fit(300,300);
 
 
        $post->proptype=$request->input('proptype');
        $post->housetype=$request->input('housetype');
-       $post->moderator=$request->input('moderator');
+    //    $post->moderator=$request->input('moderator');
        $post->bvn=$request->input('bvn');
        $post->review=$request->input('review');
        $post->phone=$request->input('phone');

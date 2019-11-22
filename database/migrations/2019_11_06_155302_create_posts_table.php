@@ -18,12 +18,12 @@ class CreatePostsTable extends Migration
             $table->string('proptype');
             // $table->unsignedBigInteger('user_id');
             $table->integer('user_id')->nullable()->unsigned();
-            $table->string('moderator')->nullable();
+            $table->string('moderator');
             $table->string('star')->nullable();
             $table->string('bvn')->nullable();
             $table->string('phone');
             $table->string('review');
-            $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('user_id')->references('id')->on('users');
             $table->string('housetype')->nullable();
             $table->string('landmark');
             $table->string('worth');

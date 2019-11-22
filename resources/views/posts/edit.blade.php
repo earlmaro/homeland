@@ -60,6 +60,16 @@ Edit Properties
                             </select>
 
                     </div>
+                    <div class=" form-group"  id="" style="display:none;" >
+                            <label for="review" >review</label>
+                            <select name="review" class="form-control form-control-sm">
+                                <option value="0"  selected>No</option>
+                                <option value="2" disabled >Yes</option>
+                                <option value="3" disabled>in-active</option>
+
+                            </select>
+
+                    </div>
 
 
                     <div class=" form-group"  id="houseprop" style="display:none;">
@@ -142,7 +152,7 @@ Edit Properties
                             <label for="propdesc">property describtion</label>
                             <textarea name="propdesc" id="" cols="30" rows="6"  class="form-control form-control-sm"></textarea>
                     </div>
-                    <div class=" form-group"  id="houseprop" >
+                    <div class=" form-group"  id="houseprop" style="display:none;">
                             <label for="validation">approved</label>
                             <select name="validation" class="form-control form-control-sm">
                                 <option value="1"  selected>No</option>

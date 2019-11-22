@@ -13,9 +13,9 @@
 
     <style>
         .mid {
-            min-height: 95vh;
+            /* min-height: 95vh;
             border-left: 2px solid #ccc;
-            border-right: 2px solid #ccc;
+            border-right: 2px solid #ccc; */
         }
     </style>
 </head>
@@ -186,6 +186,8 @@
                 <ul>
                     {{-- <li><b><a href='/posts/all'> view all your posts</a></b></li> --}}
                     <li><b><a href='/posts/pending'>view all pending posts</a></b></li>
+                    <li ><b><a href='/posts/conclude'>view all concluded posts</a></b></li>
+
 
 
                 </ul>

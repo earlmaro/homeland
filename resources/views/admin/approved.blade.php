@@ -1,12 +1,7 @@
 @extends('layouts.app')
-
-
-@section('content')
 @section('title')
-Finalized Properties
+Public pending
 @endsection
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +24,7 @@ Finalized Properties
 <body>
 
 
-
+    @section('content')
 
 
 
@@ -141,84 +136,76 @@ Finalized Properties
                 <strong>'Approved posts cannot be edited</strong>{{session()->get('approved')}}
             </div>
             @endif
-            @foreach($concluded as $conclude)
             <div class="col--7 col-sm-12 col-md-7 text-center mid">
-                    <div class="row py-4">
-                            <a href="{{ url('/admin/{{$conclude->id}}')}}">
-                                <div class="col-12">
-                                    <div class="card mb-0" style="max-width: 100%;">
-                                        <div class="row no-gutters">
-                                            <div class="col-md-4">
-                                                 @foreach($images as $image)
-                                                <div class="carousel-item {{$images[0] == $image ? "active" : ""}}">
-                                                    <img src="{{url('/images/'.$image)}}" class="d-block w-100">
-                                                </div>
-                                                @endforeach
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">POST DETAILS</h5>
-                                                    {{-- <p>Advertiser: {{$unApprovedPost->user->firstname}}
-                                                    {{$unApprovedPost->user->lastname}}</p> --}}
-                                                    <p>TYPE OF PROPERTY: {{$conclude->proptype}}</p>
-                                                    <p>LANDMARK: {{$conclude->landmark}}</p>
-                                                    <p>ADDRESS: {{$conclude->address}}</p>
-                                                    {{-- <p>Moderator: {{$unApprovedPost->moderator}}</p> --}}
-                                                    {{-- <p>star: {{$unApprovedPost->user->star}}</p> --}}
-                                                    <p>vacancy: {{$conclude->vacancy}}</p>
-                                                    <p>describtion: {{$conclude->propdesc}}</p>
-                                                    {{-- <p>Email: {{$unApprovedPost->user->email}}</p> --}}
-                                                    <p class="card-text">price range: {{$conclude->worth}}</p>
-                                                    {{-- <p class="card-text"><small class="text-muted">{{$unApprovedPost->worth}}</small>
-                                                    </p> --}}
-                                                </div>
-                                            </div>
-                                        </div>
 
+                @foreach($approvedPosts as $approvedPost)
+                {{-- @foreach($users as $user) --}}
+                <div class="row py-4">
+                    <a href="/admin/{{$approvedPost->id}}">
+                        <div class="col-12">
+                            <div class="card mb-0" style="max-width: 100%;">
+                                <div class="row no-gutters">
+                                    <div class="col-md-4">
+                                        @foreach($images as $image)
+                                        <div class="carousel-item {{$images[0] == $image ? "active" : ""}}">
+                                            <img src="{{url('/images/'.$image)}}" class="d-block w-100 image">
+                                            <div class="overlay">
+                                                    <div class="text">Click To View Post</div>
+                                                  </div>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                    <div class="col-md-8">
+                                            <div class="card-body">
+                                                    <h2 class="card-title">POST DETAILS</h2>
+                                                    {{-- <p>Advertiser: {{$approvedPost->user->firstname}} {{$approvedPost->user->lastname}}</p> --}}
+                                                      <p>TYPE OF PROPERTY: {{$approvedPost->proptype}}</p>
+                                                      <p>LANDMARK: {{$approvedPost->landmark}}</p>
+                                                      <p>ADDRESS: {{$approvedPost->address}}</p>
+                                                      <p>Moderator: {{$approvedPost->moderator}}</p>
+                                                      {{-- <p>star: {{$approvedPost->user->star}}</p> --}}
+                                                      <p>vacancy: {{$approvedPost->vacancy}}</p>
+                                                      <p >describtion: {{$approvedPost->propdesc}}</p>
+
+                                                      <p>contact: {{$approvedPost->phone}}</p>
+                                                      {{-- <p>Email: {{$approvedPost->user->email}}</p> --}}
+                                             <p class="card-text">price range: {{$approvedPost->worth}}</p>
+
+                                            </div>
                                     </div>
                                 </div>
-                                @endforeach
 
-                            </a>    </div>
+                            </div>
                         </div>
 
 
+                    </a> </div>
+                {{-- @endforeach --}}
+                @endforeach
+
+            </div>
+
             <div class="col-md-2 col-sm-12 col-lg-2 container py-3">
                 <ul>
-                        <li><b><a href='/admin/supervise'>view all supervised posts</a></b></li>
-                    {{-- <li><b><a href='posts/pending'>view all pending posts</a></b></li> --}}
+                        <li><b><a href='/admin/pending'>view all pending posts</a></b></li>
+                                    <li><b><a href='/admin/mypending'>view all your pending posts</a></b></li>
+                                    {{-- <li  class="py-3"><b><a href='/admin/approved'>view all Approved posts</a></b></li> --}}
+                                     <li><b><a href='/admin/concluded'>view all concluded posts</a></b></li>
+
 
 
                 </ul>
 
-               <div class="container">
+                <div class="container">
                     <form action="/post/create">
-                      <b>  <button class="container btn btn-link">Create New Post</p></b>
-                            @csrf
-                        </form>
+                        <b> <button class="container btn btn-link"><span style="color:#3490dc !important "> Create New Post </span></p></b>
+                        @csrf
+                    </form>
 
-        </div>
+                </div>
 
-    </div>
-    @endsection
+            </div>
+            @endsection
 </body>
 
 </html
-
-
-
-@endsection
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -162,10 +162,11 @@ Supervised Properties
                                                     <p>TYPE OF PROPERTY: {{$supervise->proptype}}</p>
                                                     <p>LANDMARK: {{$supervise->landmark}}</p>
                                                     <p>ADDRESS: {{$supervise->address}}</p>
-                                                    <p>Moderator: {{$supervise->moderator}}</p>
-                                                    <p>star: {{$supervise->user->star}}</p>
+                                                    {{-- <p>Moderator: {{$supervise->moderator}}</p> --}}
+                                                    {{-- <p>star: {{$supervise->user->star}}</p> --}}
                                                     <p>vacancy: {{$supervise->vacancy}}</p>
                                                     <p>contact: {{$supervise->phone}}</p>
+                                                    <p >describtion: {{$supervise->propdesc}}</p>
                                                     <p>Email: {{$supervise->user->email}}</p>
                                            <p class="card-text">price range: {{$supervise->worth}}</p>
                                                   </div>

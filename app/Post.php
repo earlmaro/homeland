@@ -11,7 +11,7 @@ class post extends Model
    public function user(){
     return $this->belongsTo(User::class);
 }
-
+protected $casts = ['filename' => 'array'];
 
 public function admin(){
     return $this->belongsTo(admin::class);

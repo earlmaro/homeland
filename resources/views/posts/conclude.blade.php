@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Home
+Concluded
 @endsection
 
 <!DOCTYPE html>
@@ -13,11 +13,11 @@ Home
     <title>Document</title>
 
     <style>
-        .mid {
+        /* .mid { */
             /* min-height: 95vh; */
             /* border-left: 2px solid #ccc; */
             /* border-right: 2px solid #ccc; */
-        }
+        /* } */
 
     </style>
 </head>
@@ -139,9 +139,9 @@ Home
             @endif
             <div class="col--7 col-sm-12 col-md-7 text-center mid">
 
-                @foreach($approvedPosts as $approvedPost)
+                @foreach($concludedPosts as $concludedPost)
                 <div class="row py-4">
-                    <a href="/post/{{$approvedPost->id}}">
+                    <a href="/post/{{$concludedPost->id}}">
                         <div class="col-12">
                             <div class="card mb-0" style="max-width: 100%;">
                                 <div class="row no-gutters">
@@ -160,15 +160,15 @@ Home
                                             <h5 class="card-title" >Post Describtion</h5>
                                             {{-- <p>Advertiser: {{$approvedPost->user->firstname}}
                                             {{$approvedPost->user->lastname}}</p> --}}
-                                            <p >TYPE OF PROPERTY: {{$approvedPost->proptype}}</p>
-                                            <p >LANDMARK: {{$approvedPost->landmark}}</p>
-                                            <p >ADDRESS: {{$approvedPost->address}}</p>
+                                            <p >TYPE OF PROPERTY: {{$concludedPost->proptype}}</p>
+                                            <p >LANDMARK: {{$concludedPost->landmark}}</p>
+                                            <p >ADDRESS: {{$concludedPost->address}}</p>
                                             {{-- <p>Moderator: {{$approvedPost->moderator}}</p> --}}
                                             {{-- <p>star: {{$approvedPost->user->star}}</p> --}}
-                                            <p >vacancy: {{$approvedPost->vacancy}}</p>
-                                            <p >describtion: {{$approvedPost->propdesc}}</p>
+                                            <p >vacancy: {{$concludedPost->vacancy}}</p>
+                                            <p >describtion: {{$concludedPost->propdesc}}</p>
                                             {{-- <p>Email: {{$approvedPost->user->email}}</p> --}}
-                                            <p class="card-text" >price range: {{$approvedPost->worth}}</p>
+                                            <p class="card-text" >price range: {{$concludedPost->worth}}</p>
                                             {{-- <p class="card-text"><small class="text-muted">{{$approvedPost->worth}}</small>
                                             </p> --}}
                                         </div>
@@ -186,12 +186,8 @@ Home
 
             <div class="col-md-2 col-sm-12 col-lg-2 container py-3">
                 <ul>
-                        <li><b><a href='/admin/pending'>view all pending posts</a></b></li>
-                        <li><b><a href='/admin/mypending'>view all your pending posts</a></b></li>
-                        <li  class="py-3"><b><a href='/admin/approved'>view all Approved posts</a></b></li>
-                         <li><b><a href='/admin/concluded'>view all concluded posts</a></b></li>
-
-
+                    <li><b><a href='/posts/approved'> view all your approved posts</a></b></li>
+                    <li><b><a href='/posts/pending'>view all pending posts</a></b></li>
 
 
                 </ul>
@@ -209,16 +205,3 @@ Home
 </body>
 
 </html
-
-
-
-{{-- <div class="col-md-4">
-        @foreach($images as $image)
-        <div class="carousel-item {{$images[0] == $image ? "active" : ""}}">
-            <img src="{{url('/images/'.$image)}}" class="d-block w-100 img" height="">
-            <div class="overlay">
-                <div class="text">POST DETAILS</div>
-              </div>
-        </div>
-        @endforeach
-    </div> --}}

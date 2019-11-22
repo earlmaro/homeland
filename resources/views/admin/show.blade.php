@@ -14,9 +14,9 @@ Show post
 
     <style>
         .mid {
-            max-height: 100vh;
+            /* max-height: 100vh;
             border-left: 2px solid #ccc;
-            border-right: 2px solid #ccc;
+            border-right: 2px solid #ccc; */
         }
     </style>
 </head>
@@ -202,17 +202,18 @@ Show post
                     </tr>
                 </table>
                 <div class="d-flex">
-                        @if($post->validation == 1)
+                    @if(auth()->user()->id == $post->moderator && $post->validation == 1)
                         <a href="/post/{{$post->id}}/edit"><button type="submit"
                             class="btn btn-secondary mr-3">Edit Post</button></a>
                             @endif
                             @if(auth()->user()->id == $post->user_id && $post->validation == 1)
-                            <form action="/post/{{$post->id}}" method="POST" class="d-flex pl-3 py-5">
+                            <form action="/post/{{$post->id}}" method="POST" class="d-flex pl-3 ">
                                 @method('DELETE')
                                 @csrf
                                 <button type="submit" class="btn btn-danger">Delete Post</button>
                             </form>
                             @endif
+
 
 
 
@@ -229,9 +230,10 @@ Show post
                     <div class="row">
 
                             <ul>
-                                    <li><b><a href='/admin/supervise'>view all supervised posts</a></b></li>
-                                    <li><b><a href='/admin/pending'>view all pending posts</a></b></li>
-                                    <li><b><a href='/admin/concluded'>view all concluded posts</a></b></li>
+                                   <li><b><a href='/admin/pending'>view all pending posts</a></b></li>
+                                    <li><b><a href='/admin/mypending'>view all your pending posts</a></b></li>
+                                    <li  class="py-3"><b><a href='/admin/approved'>view all Approved posts</a></b></li>
+                                     <li><b><a href='/admin/concluded'>view all concluded posts</a></b></li>
 
 
                                 </ul>
@@ -265,9 +267,17 @@ Show post
                                     @endforeach
                                 </div>
                                 @csrf
+                            <button type="submit" class="btn btn-secondary">Submit</button>
+                            </form>
+                            @endif
+
+                                @if(auth()->user()->id == $post->moderator && $post->validation == 1)
 
 
 
+                                <form action="/admin/{{$post->id}}" method="POST">
+                                    @method('PATCH')
+                                     @csrf
                                 <div class="form-group ">
                                     <label for="validation">Approve This Post</label>
                                     <select name="validation" class="form-control form-control-sm">
@@ -285,23 +295,23 @@ Show post
 
 
 
-                                @if(auth()->user()->id == $post->moderator)
+                                @if( $post->validation == 2)
 
 
                                 <form action="/admin/{{$post->id}}" method="POST">
                                     @method('PATCH')
                                     @csrf
-
-
                                 <div class="form-group ">
-                                    <label for="review">Conclude Post</label>
-                                    <select name="review" class="form-control form-control-sm">
-                                        <option value="" disabled selected>select name</option>
-                                        @foreach($users as $user)
-                                        <option value="{{$user->id}}">{{$user->firstname}} ({{$user->email}})</option>
-                                    </select>
-                                    @endforeach
+                                    <label for="validation">Conclude Post</label>
+                                    <select name="validation" class="form-control form-control-sm">
+                                            <option value="" disabled selected>successful?</option>
+                                            <option value="1">disable post </option>
+                                            <option value="3">yes! post concluded </option>
+                                            {{-- <option value="3"> Deactivate Post </option> --}}
+                                        </select>
                                 </div>
+                                    {{-- @endforeach --}}
+
                                 <button type="submit" class="btn btn-secondary">Submit</button>
                                 @endif
                             </form>

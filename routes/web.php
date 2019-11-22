@@ -29,12 +29,16 @@ Auth::routes();
 
 
 Route::get('/admin/pending', 'AdminController@pendingposts');
+Route::get('/admin/approved', 'AdminController@approvedPosts');
+
 Route::get('/admin/filter', 'AdminController@index');
 Route::get('/admin/mypending', 'AdminController@myadminpending');
 Route::get('/admin/supervise', 'AdminController@supervisedpost');
+Route::get('/admin/concluded', 'AdminController@concludedPosts');
 Route::get('/admin/{post}', 'AdminController@show');
-Route::get('/admin/concluded', 'AdminController@concluded');
+// Route::get('/admin/conclude', 'AdminController@concluded');
 Route::patch('/admin/{post}', 'AdminController@update');
+
 // Route::resource('users', 'UserController', ['only'=> ['index','edit','create','store','update','delete']]);
 
 
@@ -49,6 +53,9 @@ Route::post('/contact', 'ContactController@store');
 // Route::get('/posts/{post}/edit', 'PostController@edit');
 // Route::get('/post/{post}/edit', 'PostController@edit');
 Route::get('/posts/all', 'PostController@allposts');
+Route::get('/posts/conclude', 'PostController@concludedPosts');
+Route::get('/posts/approved', 'PostController@approvedPosts');
+
 Route::get('/posts/pending', 'PostController@pendingposts');
 Route::get('/posts/filter', 'PostController@index');
 

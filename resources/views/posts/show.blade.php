@@ -164,6 +164,7 @@ Show Properties
 
 
 
+
                     </div>
 
 
@@ -208,14 +209,12 @@ Show Properties
                             @endif
 
                             @if(auth()->user()->id == $post->user_id)
-                            <form action="/post/{{$post->id}}" method="POST" class="d-flex pl-3 py-5">
+                            <form action="/post/{{$post->id}}" method="POST" class="d-flex pl-3 " style="display:inline !important">
                                 @method('DELETE')
                                 @csrf
-                                <button type="submit" class="btn btn-danger">Delete Post</button>
+                                <button type="submit"  style="display:content" class="btn btn-danger">Delete Post</button>
                             </form>
                             @endif
-
-
 
 
                 </div>
@@ -230,9 +229,11 @@ Show Properties
                     <div class="row">
 
                             <ul>
-                                    <li class="py-3"><b><a href='/posts/all'> view all your posts</a></b></li>
+                                    {{-- <li class="py-3"><b><a href='/posts/all'> view all your posts</a></b></li> --}}
                                     <li  class="py-3"><b><a href='/posts/pending'>view all pending posts</a></b></li>
                                     <li  class="py-3"><b><a href='/posts/pending'>view all Approved posts</a></b></li>
+                                    <li ><b><a href='/posts/conclude'>view all concluded posts</a></b></li>
+
 
 
                                 </ul>

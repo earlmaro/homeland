@@ -165,6 +165,8 @@ Personal Pending
                                                       <p>Moderator: {{$adminpend->moderator}}</p>
                                                       {{-- <p>star: {{$approvedPost->user->star}}</p> --}}
                                                       <p>vacancy: {{$adminpend->vacancy}}</p>
+                                                      <p >describtion: {{$adminpend->propdesc}}</p>
+
                                                       <p>contact: {{$adminpend->phone}}</p>
                                                       {{-- <p>Email: {{$approvedPost->user->email}}</p> --}}
                                              <p class="card-text">price range: {{$adminpend->worth}}</p>
@@ -185,11 +187,10 @@ Personal Pending
 
             <div class="col-md-2 col-sm-12 col-lg-2 container py-3">
                 <ul>
-                    <li ><b><a href='/admin/supervise'>view all supervised posts</a></b></li>
-                    <li><b><a href='/admin/pending'>view all pending posts</a></b></li>
-                    <li><b><a href='/admin/mypending'>view all of your pending posts</a></b></li>
-
-
+                        <li><b><a href='/admin/pending'>view all pending posts</a></b></li>
+                        {{-- <li><b><a href='/admin/mypending'>view all your pending posts</a></b></li> --}}
+                        <li  class="py-3"><b><a href='/admin/approved'>view all Approved posts</a></b></li>
+                         <li><b><a href='/admin/concluded'>view all concluded posts</a></b></li>
 
                 </ul>
 

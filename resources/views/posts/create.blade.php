@@ -46,7 +46,7 @@ Create Post
                 <div class="container">
                     <h2 class="text-center" style="color:#3490dc" style="color:#3490dc">CREATE NEW POSTS</h2>
                     <div class=" form-group">
-                            <label for="proptype" style="color:#3490dc">property type</label>
+                            <label for="proptype" style="color:#3490dc">Property type</label>
                             <select name="proptype" class="form-control form-control-sm" id="post" style="color:#3490dc">
                                 <option value="" disabled selected style="color:#3490dc">select property type</option>
                                 <option value="house" style="color:#3490dc">house</option>
@@ -61,7 +61,7 @@ Create Post
 
 
                     <div class=" form-group"  id="houseprop" style="display:none;">
-                            <label for="housetype" style="color:#3490dc">house type</label>
+                            <label for="housetype" style="color:#3490dc">House type</label>
                             <select name="housetype" class="form-control form-control-sm" style="color:#3490dc">
                                 <option value="" disabled selected style="color:#3490dc">select property type</option>
                                 <option value="room" style="color:#3490dc">room</option>
@@ -75,7 +75,7 @@ Create Post
                     {{$errors->first('house-type')}}
 
                     <div class=" form-group">
-                            <label for="landmark" style="color:#3490dc">land mark</label>
+                            <label for="landmark" style="color:#3490dc">Landmark</label>
                             <select name="landmark" class="form-control form-control-sm" style="color:#3490dc">
                                 <option value="" disabled selected>select landmark</option>
                                 <option value="EPE" style="color:#3490dc">EPE</option>
@@ -101,7 +101,7 @@ Create Post
                             </select>
                     </div>
                     <div class=" form-group">
-                            <label for="worth" style="color:#3490dc">property estimate</label>
+                            <label for="worth" style="color:#3490dc">Property range</label>
                             <select name="worth" class="form-control form-control-sm" >
                                 <option value="" disabled selected >select property type</option>
                                 <option value=" ₦50,000 - ₦200,000" > ₦50,000 - ₦200,000</option>
@@ -117,13 +117,13 @@ Create Post
                             </select>
                     </div>
                     <div class="custom-file mb-4">
-                            <label  for="phone" style="color:#3490dc">phone number</label>
+                            <label  for="phone" style="color:#3490dc">Phone number</label>
                         <input type="number" name="phone" class="form-control form-control-sm" >
 
                       </div>
 
                     <div class=" form-group">
-                            <label for="vacancy">vacancy</label>
+                            <label for="vacancy">Vacancy</label>
                             <select name="vacancy" class="form-control form-control-sm" >
                                 <option value="" disabled selected >select property type</option>
                                 <option value="rent" >rent</option>
@@ -132,15 +132,15 @@ Create Post
 
                     </div>
                     <div class=" form-group">
-                            <label for="address">address</label>
+                            <label for="address">Address</label>
                             <textarea name="address" id="" cols="30" rows="1" class="form-control form-control-sm"></textarea>
                     </div>
 
                     <div class=" form-group">
-                            <label for="propdesc" >property describtion</label>
+                            <label for="propdesc" >More about property</label>
                             <textarea name="propdesc" id="" cols="30" rows="6"  class="form-control form-control-sm"></textarea>
                     </div>
-                    <div class=" form-group"  id="houseprop" >
+                    <div class=" form-group"  id="houseprop"  style="display:none;" >
                             <label for="validation" >approved</label>
                             <select name="validation" class="form-control form-control-sm" >
                                 <option value="1"  selected >No</option>
@@ -151,7 +151,7 @@ Create Post
 
                     </div>
                     <div class=" form-group"  id="houseprop" style="display:none;" >
-                            <label for="moderator" >approved</label>
+                            <label for="moderator" >moderator</label>
                             <select name="moderator" class="form-control form-control-sm"  >
                                 <option value="0"  >No</option>
                                 <option value="2" disabled>Yes</option>
@@ -161,9 +161,9 @@ Create Post
 
                     </div>
                     <div class=" form-group"  id="houseprop" style="display:none;" >
-                            <label for="review" >approved</label>
+                            <label for="review" >review</label>
                             <select name="review" class="form-control form-control-sm">
-                                <option value="0"  selected>No</option>
+                                <option value="0"  selected>Noo</option>
                                 <option value="2" disabled >Yes</option>
                                 <option value="3" disabled>in-active</option>
 

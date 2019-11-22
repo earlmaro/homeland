@@ -186,8 +186,10 @@ Home
 
             <div class="col-md-2 col-sm-12 col-lg-2 container py-3">
                 <ul>
-                    <li><b><a href='/posts/all'> view all your posts</a></b></li>
+                        <li><b><a href='/posts/approved'> view all your approved posts</a></b></li>
                     <li><b><a href='/posts/pending'>view all pending posts</a></b></li>
+                    <li ><b><a href='/posts/conclude'>view all concluded posts</a></b></li>
+
 
 
                 </ul>
@@ -205,3 +207,16 @@ Home
 </body>
 
 </html
+
+
+
+{{-- <div class="col-md-4">
+        @foreach($images as $image)
+        <div class="carousel-item {{$images[0] == $image ? "active" : ""}}">
+            <img src="{{url('/images/'.$image)}}" class="d-block w-100 img" height="">
+            <div class="overlay">
+                <div class="text">POST DETAILS</div>
+              </div>
+        </div>
+        @endforeach
+    </div> --}}
